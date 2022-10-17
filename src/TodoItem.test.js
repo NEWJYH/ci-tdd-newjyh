@@ -33,4 +33,16 @@ describe('<TodoItem />', () => {
         const { span } = setup({ todo: { ...sampleTodo, done: false } });
         expect(span).not.toHaveStyle('text-decoration: line-through;');
     });
+    it('calls onToggle', () => {
+        const onToggle = jest.fn();
+        const { span } = setup({ onToggle });
+        fireEvent.click(span);
+        expect(onToggle).toBeCalledWith(sampleTodo.id);
+    });
+    it('calls onRemove', () => {
+        const onRemove = jest.fn();
+        const { button } = setup({ onRemove });
+        fireEvent.click(button);
+        expect(onRemove).toBeCalledWith(sampleTodo.id);
+    });
 });
