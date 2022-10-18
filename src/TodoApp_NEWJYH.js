@@ -40,10 +40,18 @@ const TodoApp_NEWJYH = () => {
             todos.map(todo => todo.id === id ? {...todo, done: !todo.done} : todo)
         );
     }, [todos]);
+
+    // 제거 
+    const onRemove = useCallback(id => {
+        setTodos(
+            todos.filter(todo=> todo.id !== id)
+        );
+    }, [todos]);
+    
     return (
         <div>
             <TodoForm onInsert={onInsert}/>
-            <TodoList todos={todos} onToggle={onToggle}/>
+            <TodoList todos={todos} onToggle={onToggle} onRemove={onRemove}/>
         </div>
         );
 };

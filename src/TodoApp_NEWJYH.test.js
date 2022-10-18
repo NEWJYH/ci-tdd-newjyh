@@ -52,4 +52,13 @@ describe('<TodoApp_NEWJYH />', () => {
         fireEvent.click(todoText);
         expect(todoText).toHaveStyle('text-decoration: line-through');
     });
+    // remove Todo
+    it('remove todo', ()=> {
+        const {getByText} = render(<TodoApp_NEWJYH />);
+        const todoText = getByText('TDD 배우기');
+        const removeButton = todoText.nextSibling;
+        fireEvent.click(removeButton);
+        // 삭제버튼을 눌렀을 때 onRemove가 불러짐
+        expect(todoText).not.toBeInTheDocument();
+    });
 });
