@@ -33,11 +33,17 @@ const TodoApp_NEWJYH = () => {
         );
         nextId.current += 1;
     },[todos]);
-
+    // 로직 처리 
+    // todos가 변경될때마다 같이 움직임 
+    const onToggle = useCallback(id => {
+        setTodos(
+            todos.map(todo => todo.id === id ? {...todo, done: !todo.done} : todo)
+        );
+    }, [todos]);
     return (
         <div>
             <TodoForm onInsert={onInsert}/>
-            <TodoList todos={todos}/>
+            <TodoList todos={todos} onToggle={onToggle}/>
         </div>
         );
 };
