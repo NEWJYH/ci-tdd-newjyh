@@ -21,6 +21,21 @@ describe('<TodoApp_NEWJYH />', () => {
         const {getByText} = render(<TodoApp_NEWJYH />);
         getByText('TDD 배우기');
         getByText('react-testing-library');
-
     });
+    // #### TodoForm onInsert가 호출이 되는지만 확인했음
+    // #### 이제 그것에 대한 test case를 만들어 볼것. 
+    it('creates new todo', ()=>{
+        const { getByPlaceholderText, getByText } = render(<TodoApp_NEWJYH />);
+        fireEvent.change(
+            getByPlaceholderText('할 일을 입력하세요'), 
+                { target : 
+                    {  // 여기서 바꾸는 것임
+                        value: '새 항목 추가하기'
+                    }
+                }
+        );
+        // 바꾼것이 잘 들어갔는지 확인 하는 로직 
+        getByText('새 항목 추가하기');
+    });
+
 });
