@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef,useCallback, useState} from "react";
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 
@@ -14,9 +14,20 @@ const TodoApp_inbn6619 = () => {
             text: 'react-testing-library',
             done: true,
         }
-    ])
+    ]);
+    const nextId = useRef(3);
+    const onInsert = useCallback(text => {
+        setTodos(
+            todos.concat({
+                id: nextId.current,
+                text,
+                done: false,
+            })
+        );
+        nextId.current += 1;
+    }, [todos]);
     return (<div>
-        <TodoForm />
+        <TodoForm onInsert={onInsert} />
         <TodoList todos={[todos]} />
 
     </div>);
